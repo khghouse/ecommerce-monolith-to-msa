@@ -1,41 +1,132 @@
+
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.5.5'
-    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.springframework.boot' version '3.5.3' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
 }
 
-group = 'com.ecommerce'
-version = '0.0.1-SNAPSHOT'
-description = 'ecommerce-monolith-to-msa'
+// 모든 프로젝트 공통 설정
+allprojects {
+    group = 'com.ecommerce'
+    version = '1.0.0'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+    repositories {
+        mavenCentral()
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+// 서브프로젝트 설정
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    // 공통 의존성
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        runtimeOnly 'com.h2database:h2'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
     }
 }
 
-repositories {
-    mavenCentral()
+// 모놀리식 프로젝트 설정
+project(':monolith') {
+    dependencies {
+        // 모놀리식에서만 사용하는 의존성
+        // runtimeOnly 'com.h2database:h2'
+        // runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+    }
+
+    // 모놀리식은 별도의 포트로 실행
+    tasks.named('bootRun') {
+        systemProperty 'server.port', '8080'
+    }
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.h2database:h2'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+// MSA 서비스들의 공통 설정
+configure(subprojects.findAll { it.name.startsWith('service-') }) {
+    dependencies {
+        // 기본적인 MSA 서비스 의존성만
+        implementation 'org.springframework.boot:spring-boot-starter-webflux' // 서비스간 통신용
+
+        // MSA 서비스들에만 공통으로 적용할 의존성들
+//        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+//        implementation 'org.springframework.boot:spring-boot-starter-webflux' // 서비스간 통신용
+
+        // 데이터베이스
+        // runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+
+        // 분산 추적
+//        implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+//        implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+// Spring Cloud 버전 관리 (중복 제거)
+ext {
+    set('springCloudVersion', "2023.0.0")
+}
+
+// Spring Cloud 버전 관리를 모든 서브프로젝트에 적용
+subprojects {
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.0"
+            mavenBom "org.testcontainers:testcontainers-bom:1.19.0"
+        }
+    }
+}
+
+// 각 서비스별 개별 포트 설정 (개발 편의를 위해)
+project(':service-user') {
+    tasks.named('bootRun') {
+        systemProperty 'server.port', '8081'
+    }
+}
+
+project(':service-product') {
+    tasks.named('bootRun') {
+        systemProperty 'server.port', '8082'
+    }
+}
+
+project(':service-order') {
+    tasks.named('bootRun') {
+        systemProperty 'server.port', '8083'
+    }
+}
+
+// 전체 서비스를 한번에 빌드하는 태스크
+task buildAllServices {
+    dependsOn ':monolith:build', ':service-user:build', ':service-product:build', ':service-order:build'
+    description = '모든 서비스를 빌드합니다'
+}
+
+// 모든 MSA 서비스만 빌드하는 태스크
+task buildMSAServices {
+    dependsOn ':service-user:build', ':service-product:build', ':service-order:build'
+    description = 'MSA 서비스들만 빌드합니다'
 }

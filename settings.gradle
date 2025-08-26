@@ -1,1 +1,16 @@
+
+// 루트 settings.gradle
 rootProject.name = 'ecommerce-monolith-to-msa'
+
+// 모놀리식 프로젝트 포함
+include 'monolith'
+
+// MSA 서비스들 포함
+include 'service-user'
+include 'service-product'
+include 'service-order'
+
+// 서비스들의 실제 경로 지정
+project(':service-user').projectDir = new File(settingsDir, 'services/service-user')
+project(':service-product').projectDir = new File(settingsDir, 'services/service-product')
+project(':service-order').projectDir = new File(settingsDir, 'services/service-order')

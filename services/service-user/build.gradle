@@ -1,0 +1,10 @@
+
+bootJar {
+    enabled = true
+    archiveFileName = 'user-service.jar'
+}
+
+// 메인 클래스 명시적 지정
+springBoot {
+    mainClass = 'com.ecommerce.user.UserApplication'
+}
