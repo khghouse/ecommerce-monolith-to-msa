@@ -1,9 +1,9 @@
 package com.ecommerce.order.service;
 
-import com.ecommerce.service.order.entity.Order;
-import com.ecommerce.service.order.entity.OrderItem;
-import com.ecommerce.service.order.entity.OrderStatus;
-import com.ecommerce.service.order.repository.OrderRepository;
+import com.ecommerce.order.domain.Order;
+import com.ecommerce.order.domain.OrderItem;
+import com.ecommerce.order.domain.OrderStatus;
+import com.ecommerce.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,46 +104,3 @@ public class OrderService {
         }
     }
 }
-ecommerce-monolith-to-msa/
-├── services/
-│   ├── service-order/
-│   │   ├── build.gradle
-│   │   ├── src/main/java/com/ecommerce/order/
-│   │   │   ├── controller/
-│   │   │   ├── domain/
-│   │   │   ├── repository/
-│   │   │   ├── service/
-│   │   │   ├── OrderApplication.java
-│   ├── service-product/
-│   │   ├── build.gradle
-│   │   ├── src/main/java/com/ecommerce/product/
-│   │   │   ├── controller/
-│   │   │   ├── domain/
-│   │   │   ├── repository/
-│   │   │   ├── service/
-│   │   │   ├── ProductApplication.java
-│   ├── service-user/
-│   │   ├── build.gradle
-│   │   ├── src/main/java/com/ecommerce/user/
-│   │   │   ├── controller/
-│   │   │   ├── domain/
-│   │   │   ├── repository/
-│   │   │   ├── service/
-│   │   │   ├── UserApplication.java
-├── monolith/
-│   │   ├── src/main/java/com/ecommerce/
-│   │   │   ├── domain/
-│   │   │   │   ├── order/
-│   │   │   │   ├── product/
-│   │   │   │   ├── user/
-│   │   │   ├── EcommerceMonolithToMsaApplication
-├── build.gradle
-└── settings.gradle
-
-
-
-├── shared-common/                         # 🆕 공통 모듈
-│   ├── src/main/java/com/example/shared/
-│   │   ├── common/
-│   │   │   ├── dto/
-│   │   │   │   ├── ApiResponse.java

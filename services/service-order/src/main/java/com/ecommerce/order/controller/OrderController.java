@@ -1,9 +1,9 @@
-package com.ecommerce.service.order.controller;
+package com.ecommerce.order.controller;
 
-import com.ecommerce.service.order.entity.Order;
-import com.ecommerce.service.order.entity.OrderItem;
-import com.ecommerce.service.order.entity.OrderStatus;
-import com.ecommerce.service.order.service.OrderService;
+import com.ecommerce.order.domain.Order;
+import com.ecommerce.order.domain.OrderItem;
+import com.ecommerce.order.domain.OrderStatus;
+import com.ecommerce.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

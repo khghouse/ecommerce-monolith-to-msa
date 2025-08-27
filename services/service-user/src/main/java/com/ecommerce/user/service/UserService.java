@@ -1,7 +1,7 @@
-package com.ecommerce.service.user.service;
+package com.ecommerce.user.service;
 
-import com.ecommerce.service.user.entity.User;
-import com.ecommerce.service.user.repository.UserRepository;
+import com.ecommerce.user.domain.User;
+import com.ecommerce.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

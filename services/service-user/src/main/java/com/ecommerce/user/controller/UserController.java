@@ -1,7 +1,7 @@
-package com.ecommerce.service.user.controller;
+package com.ecommerce.user.controller;
 
-import com.ecommerce.service.user.entity.User;
-import com.ecommerce.service.user.service.UserService;
+import com.ecommerce.user.domain.User;
+import com.ecommerce.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

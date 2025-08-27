@@ -1,7 +1,7 @@
-package com.ecommerce.service.product.service;
+package com.ecommerce.product.service;
 
-import com.ecommerce.service.product.entity.Product;
-import com.ecommerce.service.product.repository.ProductRepository;
+import com.ecommerce.product.domain.Product;
+import com.ecommerce.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
