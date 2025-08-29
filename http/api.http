@@ -1,6 +1,6 @@
 
 ### 사용자 등록
-POST http://localhost:8081/api/users
+POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 GET http://localhost:8081/api/users/1
 
 ### 상품 등록
-POST http://localhost:8082/api/products
+POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
@@ -26,7 +26,7 @@ Content-Type: application/json
 GET http://localhost:8082/api/products/1
 
 ### 주문 등록
-POST http://localhost:8083/api/orders/users/1
+POST http://localhost:8080/api/orders/users/1
 Content-Type: application/json
 
 [{

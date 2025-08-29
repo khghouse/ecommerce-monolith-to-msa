@@ -8,3 +8,7 @@ bootJar {
 springBoot {
     mainClass = 'com.ecommerce.user.UserApplication'
 }
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}

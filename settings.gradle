@@ -6,6 +6,7 @@ include 'service-user'
 include 'service-product'
 include 'service-order'
 include 'eureka-server'
+include 'api-gateway'
 
 // 서비스들의 실제 경로 지정
 project(':service-user').projectDir = new File(settingsDir, 'services/service-user')

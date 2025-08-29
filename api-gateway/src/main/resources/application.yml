@@ -1,0 +1,34 @@
+server:
+  port: 8080 # 게이트웨이 서버 포트
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # 유레카 서버 주소
+
+spring:
+  application:
+    name: api-gateway # 유레카에 등록될 게이트웨이 서비스 이름
+
+  cloud:
+    gateway:
+      routes:
+        # User Service 라우팅 설정
+        - id: service-user # 라우트의 고유 식별자
+          uri: lb://service-user # 로드밸런싱 + Eureka 서비스명
+          predicates:
+            - Path=/api/users/**
+
+        # Product Service 라우팅 설정
+        - id: service-product
+          uri: lb://service-product
+          predicates:
+            - Path=/api/products/**
+
+        # Order Service 라우팅 설정
+        - id: service-order
+          uri: lb://service-order
+          predicates:
+            - Path=/api/orders/**
