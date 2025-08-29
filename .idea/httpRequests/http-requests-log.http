@@ -1,0 +1,446 @@
+GET http://localhost:8083/api/orders/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-30T003313.200.json
+
+###
+
+POST http://localhost:8080/api/orders/users/1
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+[{
+  "productId": 1,
+  "quantity": 1
+}]
+
+<> 2025-08-30T003312.200.json
+
+###
+
+GET http://localhost:8082/api/products/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-30T003310.200.json
+
+###
+
+GET http://localhost:8081/api/users/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-30T003308.200.json
+
+###
+
+POST http://localhost:8080/api/products
+Content-Type: application/json
+Content-Length: 70
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "아이폰",
+  "price": "1000000",
+  "stockQuantity": 10
+}
+
+<> 2025-08-30T003255.200.json
+
+###
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "홍길동",
+  "email": "home@test.com",
+  "password": "123"
+}
+
+<> 2025-08-30T003253.200.json
+
+###
+
+GET http://localhost:8083/api/orders/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-30T000737.200.json
+
+###
+
+POST http://localhost:8080/api/orders/users/1
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+[{
+  "productId": 1,
+  "quantity": 1
+}]
+
+<> 2025-08-30T000735.200.json
+
+###
+
+GET http://localhost:8082/api/products/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-30T000733.200.json
+
+###
+
+GET http://localhost:8081/api/users/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-30T000731.200.json
+
+###
+
+POST http://localhost:8080/api/products
+Content-Type: application/json
+Content-Length: 70
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "아이폰",
+  "price": "1000000",
+  "stockQuantity": 10
+}
+
+<> 2025-08-30T000724.200.json
+
+###
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "홍길동",
+  "email": "home@test.com",
+  "password": "123"
+}
+
+<> 2025-08-30T000713.200.json
+
+###
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "홍길동",
+  "email": "home@test.com",
+  "password": "123"
+}
+
+<> 2025-08-30T000542.503.json
+
+###
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "홍길동",
+  "email": "home@test.com",
+  "password": "123"
+}
+
+<> 2025-08-29T235929.503.json
+
+###
+
+POST http://localhost:8083/api/orders/users/1
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+[{
+  "productId": 1,
+  "quantity": 1
+}]
+
+<> 2025-08-29T163314.200.json
+
+###
+
+POST http://localhost:8083/api/orders/users/1
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+[{
+  "productId": 1,
+  "quantity": 1
+}]
+
+<> 2025-08-29T163247.500.json
+
+###
+
+POST http://localhost:8082/api/products
+Content-Type: application/json
+Content-Length: 70
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "아이폰",
+  "price": "1000000",
+  "stockQuantity": 10
+}
+
+<> 2025-08-29T163245.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "홍길동",
+  "email": "home@test.com",
+  "password": "123"
+}
+
+<> 2025-08-29T163242.200.json
+
+###
+
+POST http://localhost:8083/api/orders/users/1
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+[{
+  "productId": 1,
+  "quantity": 1
+}]
+
+<> 2025-08-29T132815.200.json
+
+###
+
+POST http://localhost:8082/api/products
+Content-Type: application/json
+Content-Length: 70
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "아이폰",
+  "price": "1000000",
+  "stockQuantity": 10
+}
+
+<> 2025-08-29T132813.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "홍길동",
+  "email": "home@test.com",
+  "password": "123"
+}
+
+<> 2025-08-29T132811.200.json
+
+###
+
+GET http://localhost:8083/api/orders/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-29T111529.200.json
+
+###
+
+POST http://localhost:8083/api/orders/users/1
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+[{
+  "productId": 1,
+  "quantity": 1
+}]
+
+<> 2025-08-29T111505.200.json
+
+###
+
+POST http://localhost:8083/api/orders/users/1
+Content-Type: application/json
+Content-Length: 37
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productId": 1,
+  "quantity": 1
+}
+
+<> 2025-08-29T111450.400.json
+
+###
+
+POST http://localhost:8083/api/orders/users/1
+Content-Type: application/json
+Content-Length: 37
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productId": 1,
+  "quantity": 1
+}
+
+<> 2025-08-29T111442.400.json
+
+###
+
+GET http://localhost:8082/api/products/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-29T111420.200.json
+
+###
+
+GET http://localhost:8081/api/users/1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2025-08-29T111350.200.json
+
+###
+
+POST http://localhost:8083/api/orders/users/1
+Content-Type: application/json
+Content-Length: 37
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "productId": 1,
+  "quantity": 1
+}
+
+<> 2025-08-29T111007.400.json
+
+###
+
+POST http://localhost:8082/api/products
+Content-Type: application/json
+Content-Length: 70
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "아이폰",
+  "price": "1000000",
+  "stockQuantity": 10
+}
+
+<> 2025-08-29T110936.200.json
+
+###
+
+POST http://localhost:8082/api/products
+Content-Type: application/json
+Content-Length: 65
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "아이폰",
+  "price": "1000000",
+  "quantity": 10
+}
+
+<> 2025-08-29T110758.500.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "홍길동",
+  "email": "home@test.com",
+  "password": "123"
+}
+
+<> 2025-08-29T110749.200.json
+
+###
+

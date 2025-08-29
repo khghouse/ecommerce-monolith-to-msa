@@ -16,19 +16,19 @@ spring:
     gateway:
       routes:
         # User Service 라우팅 설정
-        - id: service-user # 라우트의 고유 식별자
-          uri: lb://service-user # 로드밸런싱 + Eureka 서비스명
+        - id: user-service # 라우트의 고유 식별자
+          uri: lb://user-service # 로드밸런싱 + Eureka 서비스명
           predicates:
             - Path=/api/users/**
 
         # Product Service 라우팅 설정
-        - id: service-product
-          uri: lb://service-product
+        - id: product-service
+          uri: lb://product-service
           predicates:
             - Path=/api/products/**
 
         # Order Service 라우팅 설정
-        - id: service-order
-          uri: lb://service-order
+        - id: order-service
+          uri: lb://order-service
           predicates:
             - Path=/api/orders/**

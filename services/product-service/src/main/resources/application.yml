@@ -1,13 +1,13 @@
 
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
-    name: service-user
+    name: product-service
 
   datasource:
-    url: jdbc:h2:mem:user
+    url: jdbc:h2:mem:product
     driver-class-name: org.h2.Driver
     username: sa
     password:

@@ -2,13 +2,13 @@
 rootProject.name = 'ecommerce-monolith-to-msa'
 
 // MSA 서비스들 포함
-include 'service-user'
-include 'service-product'
-include 'service-order'
+include 'user-service'
+include 'product-service'
+include 'order-service'
 include 'eureka-server'
 include 'api-gateway'
 
 // 서비스들의 실제 경로 지정
-project(':service-user').projectDir = new File(settingsDir, 'services/service-user')
-project(':service-product').projectDir = new File(settingsDir, 'services/service-product')
-project(':service-order').projectDir = new File(settingsDir, 'services/service-order')
+project(':user-service').projectDir = new File(settingsDir, 'services/user-service')
+project(':product-service').projectDir = new File(settingsDir, 'services/product-service')
+project(':order-service').projectDir = new File(settingsDir, 'services/order-service')
