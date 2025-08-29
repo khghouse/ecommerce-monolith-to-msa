@@ -2,9 +2,6 @@
 // 루트 settings.gradle
 rootProject.name = 'ecommerce-monolith-to-msa'
 
-// 모놀리식 프로젝트 포함
-include 'monolith'
-
 // MSA 서비스들 포함
 include 'service-user'
 include 'service-product'
