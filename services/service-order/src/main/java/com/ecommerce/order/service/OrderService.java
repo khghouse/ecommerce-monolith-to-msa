@@ -1,9 +1,15 @@
 package com.ecommerce.order.service;
 
+import com.ecommerce.order.client.ProductServiceClient;
+import com.ecommerce.order.client.UserServiceClient;
 import com.ecommerce.order.domain.Order;
 import com.ecommerce.order.domain.OrderItem;
 import com.ecommerce.order.domain.OrderStatus;
+import com.ecommerce.order.dto.ProductDto;
+import com.ecommerce.order.dto.UserDto;
 import com.ecommerce.order.repository.OrderRepository;
+// import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+// import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,41 +23,47 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final ProductService productService;
-    private final UserService userService;
+    private final UserServiceClient userServiceClient;
+    private final ProductServiceClient productServiceClient;
 
     @Transactional
+    // @CircuitBreaker(name = "order-service")
+    // @Retry(name = "order-service")
     public Order createOrder(Long userId, List<OrderItem> orderItems) {
-        // 사용자 정보 조회
-        User user = userService.findById(userId)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + userId));
+
+        // 1. 사용자 정보 확인
+        UserDto user = userServiceClient.getUser(userId);
+        if (user == null || user.fallback()) {
+            throw new RuntimeException("사용자 서비스를 사용할 수 없습니다.");
+        }
 
         // 주문 생성
         Order order = new Order();
-        order.setUserId(userId);
-        order.setUserName(user.getName());
-        order.setUserEmail(user.getEmail());
-        order.setShippingAddress(user.getAddress());
 
-        // 주문 항목 처리
+        // 2. 상품 정보 확인
         for (OrderItem orderItem : orderItems) {
-            // 상품 정보 조회 및 재고 확인
-            Product product = productService.findById(orderItem.getProductId())
-                    .orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다: " + orderItem.getProductId()));
-
-            if (!product.isAvailable(orderItem.getQuantity())) {
-                throw new RuntimeException("재고가 부족합니다. 상품: " + product.getName());
+            ProductDto product = productServiceClient.getProduct(orderItem.getProductId());
+            if (product == null || product.fallback()) {
+                throw new RuntimeException("상품 서비스를 사용할 수 없습니다");
             }
 
-            // 주문 항목 정보 설정
-            orderItem.setProductName(product.getName());
-            orderItem.setUnitPrice(product.getPrice());
-            order.addOrderItem(orderItem);
+            // 재고 확인
+            if (product.stockQuantity() < orderItem.getQuantity()) {
+                throw new RuntimeException("재고가 부족합니다");
+            }
 
-            // 재고 차감
-            productService.decreaseStock(product.getId(), orderItem.getQuantity());
+            Boolean stockDecreased = productServiceClient.decreaseStock(orderItem.getProductId(), orderItem.getQuantity());
+            if (!stockDecreased) {
+                throw new RuntimeException("재고 차감에 실패했습니다");
+            }
+
+            orderItem.setUnitPrice(product.price());
+            order.addOrderItem(orderItem);
         }
 
+        order.setUserId(userId);
+        order.setUserName(user.name());
+        order.setUserEmail(user.email());
         // 총 금액 계산
         order.calculateTotalAmount();
 
@@ -97,10 +109,12 @@ public class OrderService {
 
         // 재고 원복 (실제로는 별도 재고 관리 로직이 필요)
         for (OrderItem item : order.getOrderItems()) {
-            Product product = productService.findById(item.getProductId()).orElse(null);
+            ProductDto product = productServiceClient.getProduct(item.getProductId());
             if (product != null) {
-                product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
+                // 재고 증가 로직
+                // product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
             }
         }
     }
+
 }

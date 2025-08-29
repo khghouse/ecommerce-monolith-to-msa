@@ -1,8 +1,7 @@
-
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.5.3' apply false
-    id 'io.spring.dependency-management' version '1.1.7' apply false
+    id 'org.springframework.boot' version '3.4.0' apply false
+    id 'io.spring.dependency-management' version '1.1.4' apply false
 }
 
 // 모든 프로젝트 공통 설정
@@ -15,7 +14,13 @@ allprojects {
     }
 }
 
-// 서브프로젝트 설정
+// Spring Cloud 버전 관리
+ext {
+    springCloudVersion = "2024.0.0"
+    testcontainersVersion = "1.19.7"
+}
+
+// 서브 프로젝트 설정
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
@@ -43,6 +48,20 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+        // --- MSA (Spring Cloud) 공통 의존성 ---
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+        // implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+        // implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+        // implementation 'org.springframework.boot:spring-boot-starter-webflux' // 비동기 통신용
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+        }
     }
 
     tasks.named('test') {

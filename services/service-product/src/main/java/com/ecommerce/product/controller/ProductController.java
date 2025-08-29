@@ -59,4 +59,11 @@ public class ProductController {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/decrease-stock")
+    public ResponseEntity<Boolean> decreaseStock(@PathVariable("id") Long id, @RequestBody Integer quantity) {
+        productService.decreaseStock(id, quantity);
+        return ResponseEntity.ok(true);
+    }
+
 }
