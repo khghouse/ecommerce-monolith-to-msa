@@ -8,15 +8,16 @@ import com.ecommerce.order.domain.OrderStatus;
 import com.ecommerce.order.dto.ProductDto;
 import com.ecommerce.order.dto.UserDto;
 import com.ecommerce.order.repository.OrderRepository;
-// import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-// import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -27,12 +28,11 @@ public class OrderService {
     private final ProductServiceClient productServiceClient;
 
     @Transactional
-    // @CircuitBreaker(name = "order-service")
-    // @Retry(name = "order-service")
+    @CircuitBreaker(name = "orderService", fallbackMethod = "createOrderFallback")
     public Order createOrder(Long userId, List<OrderItem> orderItems) {
-
         // 1. 사용자 정보 확인
         UserDto user = userServiceClient.getUser(userId);
+
         if (user == null || user.fallback()) {
             throw new RuntimeException("사용자 서비스를 사용할 수 없습니다.");
         }
@@ -115,6 +115,11 @@ public class OrderService {
                 // product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
             }
         }
+    }
+
+    public Order createOrderFallback(Long userId, List<OrderItem> orderItems, Throwable t) {
+        log.error("[Fallback] {}", t.getMessage());
+        return null; // 대체 응답 제공
     }
 
 }

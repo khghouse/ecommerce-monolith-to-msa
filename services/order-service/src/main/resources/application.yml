@@ -1,4 +1,3 @@
-
 server:
   port: 8083
 
@@ -36,3 +35,27 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      orderService:
+        register-health-indicator: true                   # [헬스 체크에 포함] /actuator/health에서 상태 확인 가능
+        sliding-window-size: 5                            # [실패율 계산 범위] 최근 5번 호출로 실패율 계산
+        minimum-number-of-calls: 3                        # [최소 호출 수] 최소 3번 호출해야 실패율 계산 시작
+        failure-rate-threshold: 50                        # [실패율 임계값] 50% 초과시 OPEN 전환
+        wait-duration-in-open-state: 10s                  # [OPEN 대기 시간] 10초 후 HALF_OPEN 전환
+        permitted-number-of-calls-in-half-open-state: 2   # [HALF_OPEN 테스트 횟수] 2번 연속 성공해야 CLOSED 전환
+        ignoreExceptions:
+          - "feign.FeignException$BadRequest"           # 400
+          - "feign.FeignException$Unauthorized"         # 401
+          - "feign.FeignException$Forbidden"            # 403
+          - "feign.FeignException$NotFound"             # 404
+          - "feign.FeignException$UnprocessableEntity"  # 422
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,circuitbreakers,circuitbreakerevents
+
