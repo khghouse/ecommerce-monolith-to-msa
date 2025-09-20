@@ -1,0 +1,9 @@
+# Config Server 연결에 필요한 최소 설정
+spring:
+  application:
+    name: order-service             # Config Server에 알릴 서비스 ID
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server   # Config Server 연결 설정 (위치 정보)

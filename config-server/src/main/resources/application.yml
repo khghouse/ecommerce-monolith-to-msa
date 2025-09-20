@@ -10,3 +10,4 @@ spring:
         git:
           uri: https://github.com/khghouse/msa-config
           search-paths: config
+          # default-label: main # 브랜치 이름이 main이 아니면 지정
